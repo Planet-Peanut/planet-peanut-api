@@ -24,49 +24,45 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a simple API built with NestJS and MongoDB Atlas for managing users. The project is a simple CRUD API based of an app called "Planet Peanut".
 
-## Installation
+## API Documentation
 
-```bash
-$ npm install
+The API has the following endpoints:
+
+### Create User
+
+- **URL**: `/users/new`
+- **Method**: `POST`
+- **Request Body**:
+
+```json
+{
+  "name": "Daniel",
+  "avatar": "Lion"
+}
 ```
 
-## Running the app
+## Prerequisites
 
-```bash
-# development
-$ npm run start
+- .env file with the following variables:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```env
+MONGO_DB_URI=mongodb+srv://skillzy:orangedog@cluster0.5vf3tee.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 ```
 
-## Test
+## Dependencies
 
-```bash
-# unit tests
-$ npm run test
+- `@nestjs/mongoose `
+- `mongoose `
+- `@nestjs/config`
+- `class-validator`
+- `class-transformer`
 
-# e2e tests
-$ npm run test:e2e
+## Sources
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- https://docs.nestjs.com/techniques/mongodb
+- https://docs.nestjs.com/techniques/validation
 
 ## License
 
