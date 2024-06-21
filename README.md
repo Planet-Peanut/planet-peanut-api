@@ -24,7 +24,7 @@
 
 ## Description
 
-This project is a simple API built with NestJS and MongoDB Atlas for managing users. The project is a simple CRUD API based of an app called "Planet Peanut".
+This project is a simple API built with NestJS and MongoDB Atlas for managing users. It is a simple CRUD API for an app called "Planet Peanut".
 
 ## API Documentation
 
@@ -43,6 +43,10 @@ The API has the following endpoints:
 }
 ```
 
+## Swagger Documentation
+
+The Swagger API documentation can be accessed at `http://localhost:3000/api`
+
 ## Prerequisites
 
 - .env file with the following variables:
@@ -58,11 +62,13 @@ MONGO_DB_URI=mongodb+srv://skillzy:orangedog@cluster0.5vf3tee.mongodb.net/?retry
 - `@nestjs/config`
 - `class-validator`
 - `class-transformer`
+- `@nestjs/swagger`
 
 ## Sources
 
 - https://docs.nestjs.com/techniques/mongodb
 - https://docs.nestjs.com/techniques/validation
+- https://docs.nestjs.com/openapi/introduction
 
 ## License
 
