@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
@@ -11,7 +11,16 @@ import { MongooseModule } from '@nestjs/mongoose';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGO_DB_URI),
+    MongooseModule.forRootAsync({
+      useFactory: async (configService: ConfigService) => {
+        const isProduction = process.env.NODE_ENV === 'production';
+        const uri = isProduction
+          ? configService.get<string>('MONGO_DB_URI_PROD')
+          : configService.get<string>('MONGO_DB_URI_DEV');
+        return { uri };
+      },
+      inject: [ConfigService],
+    }),
     UsersModule,
   ],
   controllers: [AppController],
