@@ -4,15 +4,17 @@ import {
   Delete,
   NotFoundException,
   Post,
+  Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schemas/user.schema';
 import { ApiTags } from '@nestjs/swagger';
 import { DeleteUserDto } from './dto/delete-user.dto';
+import { UpdateUserItemsDto } from './dto/update-useri-tems.dto';
 
 @ApiTags('user')
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -30,5 +32,11 @@ export class UsersController {
     }
 
     return user;
+  }
+
+  @Put('update-items-user')
+  async updateUserItems(@Body() updateUserItemsDto: UpdateUserItemsDto) {
+    const { user, items, itemsWorn } = updateUserItemsDto;
+    return this.usersService.updateUserItems(user, items, itemsWorn);
   }
 }
