@@ -55,8 +55,8 @@ The Swagger API documentation can be accessed at `http://localhost:3000/api`
 # For production
 MONGO_DB_URI=mongodb+srv://skillzy:orangedog@cluster0.5vf3tee.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-# For development
-MONGO_DB_URI_DEV=mongodb://damian:Admin123@localhost:27017 # Local MongoDB docker container URI
+# For development (MongoDB docker container URI)
+MONGO_DB_URI_DEV=mongodb://damian:Admin123@localhost:27017
 ```
 
 ## Dependencies

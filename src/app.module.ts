@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { RunModule } from './runs/run.module';
+import { RunModule } from './run/run.module';
+import { TeacherModule } from './teacher/teacher.module';
+import { ClassModule } from './class/class.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { RunModule } from './runs/run.module';
     }),
     UsersModule,
     RunModule,
+    TeacherModule,
+    ClassModule,
   ],
   controllers: [AppController],
   providers: [AppService],
