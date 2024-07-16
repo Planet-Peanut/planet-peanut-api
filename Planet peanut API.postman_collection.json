@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "00398a61-7624-448a-a315-e3f7eee2f020",
+		"name": "Planet peanut API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9313335"
+	},
+	"item": [
+		{
+			"name": "teachers",
+			"item": [
+				{
+					"name": "create-teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Damian1\",\n  \"email\": \"b@x.se\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/teacher/create-teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"teacher",
+								"create-teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacher-create-class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"school\": {\n        \"name\": \"MKT\",\n        \"grade\": \"5\",\n        \"letter\": \"A\",\n        \"country\": \"Sweden\"\n    },\n    \"teacherID\": \"668ed5b9fa321d5e685906d9\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/teacher/teacher-create-class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"teacher",
+								"teacher-create-class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-class-from-teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teacherID\": \"668ed5b9fa321d5e685906d9\",\n    \"classID\": \"668eed3fd1323b11323632df\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/teacher/remove-class-from-teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"teacher",
+								"remove-class-from-teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete teacher",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"b@x.se\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/teacher/delete-teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"teacher",
+								"delete-teacher"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "runs",
+			"item": [
+				{
+					"name": "create run",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user\": \"Damian72\",\n  \"score\": 85,\n  \"time\": 1200,\n  \"reward\": \"gold medal\",\n  \"classname\": \"Math101\",\n  \"lesson\": \"Algebra Basics\",\n  \"correctAnswer\": 15,\n  \"wrongAnswer\": 3,\n  \"subject\": \"Mathematics\",\n  \"difficulty\": \"Medium\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/run/upload-run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"run",
+								"upload-run"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Damian\",\n    \"avatar\": \"lion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Damian5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user items",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"Damian72\",\n    \"items\": {\n        \"item1\": \"sword\",\n        \"item2\": \"shield\"\n    },\n    \"itemsWorn\": {\n        \"head\": \"helmet\",\n        \"body\": \"armor\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/update-items-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"update-items-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "classes",
+			"item": [
+				{
+					"name": "user enroll in class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Daniel3\",\n    \"school\": {\n        \"name\": \"MIT\",\n        \"grade\": \"5\",\n        \"letter\": \"A\",\n        \"country\": \"Sweden\"\n    },\n    \"prevSchool\": {\n        \"name\": \"Harvard\",\n        \"grade\": \"4\",\n        \"letter\": \"A\",\n        \"country\": \"England\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/class/user-enroll-in-class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"class",
+								"user-enroll-in-class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove student from class",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"classID\": \"6696f2955cedda5189f25f0c\",\n    \"username\": \"Daniel3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/class/remove-student-from-class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"class",
+								"remove-student-from-class"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

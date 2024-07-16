@@ -47,6 +47,12 @@ The API has the following endpoints:
 
 The Swagger API documentation can be accessed at `http://localhost:3000/api`
 
+or
+
+Download the Postman collection and import it into Postman:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](./Planet%20peanut%20API.postman_collection.json)
+
 ## Prerequisites
 
 - .env file with the following variables:
