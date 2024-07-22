@@ -26,24 +26,7 @@
 
 This project is a simple API built with NestJS and MongoDB Atlas for managing users. It is a simple CRUD API for an app called "Planet Peanut".
 
-## API Documentation
-
-The API has the following endpoints:
-
-### Create User
-
-- **URL**: `/users/new`
-- **Method**: `POST`
-- **Request Body**:
-
-```json
-{
-  "name": "Daniel",
-  "avatar": "Lion"
-}
-```
-
-## Swagger Documentation
+## API Documentation (Swagger)
 
 The Swagger API documentation can be accessed at `http://localhost:3000/api`
 
@@ -65,10 +48,21 @@ MONGO_DB_URI=mongodb+srv://skillzy:orangedog@cluster0.5vf3tee.mongodb.net/?retry
 MONGO_DB_URI_DEV=mongodb://damian:Admin123@localhost:27017
 ```
 
+## Running the app
+
+```bash
+# development mode
+$ npm run start:dev
+
+# production mode
+$ npm run build
+$ npm run start:prod
+```
+
 ## Dependencies
 
-- `@nestjs/mongoose `
-- `mongoose `
+- `@nestjs/mongoose`
+- `mongoose`
 - `@nestjs/config`
 - `class-validator`
 - `class-transformer`
