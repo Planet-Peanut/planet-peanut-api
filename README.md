@@ -67,12 +67,15 @@ $ npm run start:prod
 - `class-validator`
 - `class-transformer`
 - `@nestjs/swagger`
+- `bcrypt`
 
 ## Sources
 
 - https://docs.nestjs.com/techniques/mongodb
 - https://docs.nestjs.com/techniques/validation
 - https://docs.nestjs.com/openapi/introduction
+- https://docs.nestjs.com/recipes/crud-generator
+- https://docs.nestjs.com/security/encryption-and-hashing
 
 ## License
 
