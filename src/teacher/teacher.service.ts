@@ -11,6 +11,8 @@ import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { ClassService } from 'src/class/class.service';
 import { Class } from 'src/class/schemas/class.schema';
 import { CreateClassDto } from 'src/class/dto/create-class.dto';
+import * as bcrypt from 'bcrypt';
+import { UpdateTeacherPasswordDto } from './dto/update-teacher-password.dto';
 
 @Injectable()
 export class TeacherService {
@@ -21,8 +23,16 @@ export class TeacherService {
   ) {}
 
   async createTeacher(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
-    const createdTeacher = new this.teacherModel(createTeacherDto);
-    return createdTeacher.save();
+    const { password } = createTeacherDto;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const teacher = new this.teacherModel({
+      ...createTeacherDto,
+      password: hashedPassword,
+    });
+
+    return teacher.save();
   }
 
   async teacherCreateClass(createClassDto: CreateClassDto): Promise<Teacher> {
@@ -82,5 +92,28 @@ export class TeacherService {
     await this.teacherModel.deleteOne(teacher['_id']);
 
     return teacher;
+  }
+
+  async changeTeacherPassword(
+    updateTeacherPasswordDto: UpdateTeacherPasswordDto,
+  ): Promise<Teacher> {
+    const { email, oldPassword, newPassword } = updateTeacherPasswordDto;
+
+    const teacher = await this.teacherModel.findOne({
+      email: email.toString(),
+    });
+
+    if (!teacher) {
+      throw new NotFoundException('Teacher not found');
+    }
+
+    const isPasswordMatch = await bcrypt.compare(oldPassword, teacher.password);
+    if (!isPasswordMatch) {
+      throw new BadRequestException('Old password is incorrect');
+    }
+
+    teacher.password = await bcrypt.hash(newPassword, 10);
+
+    return teacher.save();
   }
 }
