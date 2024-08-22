@@ -77,6 +77,7 @@ $ npm run start:prod
 - https://docs.nestjs.com/openapi/introduction
 - https://docs.nestjs.com/recipes/crud-generator
 - https://docs.nestjs.com/security/encryption-and-hashing
+- https://docs.nestjs.com/devtools/ci-cd-integration
 
 ## License
 
