@@ -68,6 +68,7 @@ $ npm run start:prod
 - `class-transformer`
 - `@nestjs/swagger`
 - `bcrypt`
+- `eslint`
 
 ## Sources
 
