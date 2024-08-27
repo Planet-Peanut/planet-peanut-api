@@ -1,10 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { SchoolType } from 'src/class/schemas/class.schema';
+
+class ClassnameType {
+  grade: number;
+  letter: string;
+  school: string;
+}
 
 @Schema()
 export class Run extends Document {
   @Prop({ required: true })
-  user: string;
+  username: string;
 
   @Prop({ required: true })
   score: number;
@@ -13,25 +20,25 @@ export class Run extends Document {
   time: number;
 
   @Prop({ required: true })
-  reward: string;
+  reward: boolean;
 
-  @Prop({ required: true })
-  classname: string;
+  @Prop({ required: true, type: Object })
+  classname: SchoolType;
 
   @Prop({ required: true })
   lesson: string;
 
   @Prop({ required: true })
-  correctAnswer: number;
+  correctAnswers: number;
 
   @Prop({ required: true })
-  wrongAnswer: number;
+  wrongAnswers: number;
 
   @Prop({ required: true })
-  subject: string;
+  subject: [string];
 
-  @Prop({ required: true })
-  difficulty: string;
+  @Prop({ type: Date, required: true, default: Date.now })
+  createdAt: Date;
 }
 
 export const RunSchema = SchemaFactory.createForClass(Run);

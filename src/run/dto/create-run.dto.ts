@@ -1,10 +1,20 @@
+import { Prop } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsBoolean,
+  IsObject,
+  IsArray,
+  IsDate,
+  IsOptional,
+} from 'class-validator';
+import { SchoolType } from 'src/class/schemas/class.schema';
 
 export class CreateRunDto {
   @ApiProperty({ description: 'The name of the user', example: 'Daniel' })
   @IsString()
-  user: string;
+  username: string;
 
   @ApiProperty({ description: 'The score of the user', example: 100 })
   @IsNumber()
@@ -14,31 +24,41 @@ export class CreateRunDto {
   @IsNumber()
   time: number;
 
-  @ApiProperty({ description: 'The reward of the user', example: 'gold' })
-  @IsString()
-  reward: string;
+  @ApiProperty({ description: 'The reward of the user', example: false })
+  @IsBoolean()
+  reward: boolean;
 
-  @ApiProperty({ description: 'The classname of the user', example: 'Math' })
-  @IsString()
-  classname: string;
+  @ApiProperty({
+    description: 'The classname of the user',
+    example: { grade: 9, letter: 'c', school: 'Albertslund Ungecenter' },
+  })
+  @IsObject()
+  classname: SchoolType;
 
-  @ApiProperty({ description: 'The lesson of the user', example: 'Addition' })
+  @ApiProperty({
+    description: 'The id of the lesson',
+    example: '234324-234234-23423',
+  })
   @IsString()
   lesson: string;
 
   @ApiProperty({ description: 'The correct answer of the user', example: 10 })
   @IsNumber()
-  correctAnswer: number;
+  correctAnswers: number;
 
   @ApiProperty({ description: 'The wrong answer of the user', example: 5 })
   @IsNumber()
-  wrongAnswer: number;
+  wrongAnswers: number;
 
-  @ApiProperty({ description: 'The subject of the user', example: 'Math' })
-  @IsString()
-  subject: string;
+  @ApiProperty({ description: 'The subject of the user', example: ['Math'] })
+  @IsArray()
+  subject: string[];
 
-  @ApiProperty({ description: 'The difficulty of the user', example: 'easy' })
-  @IsString()
-  difficulty: string;
+  @ApiProperty({
+    description: 'The creation date of the run',
+    example: new Date().toISOString(),
+  })
+  @IsDate()
+  @IsOptional() // Marked as optional since the default value will be handled by Mongoose
+  createdAt?: Date;
 }

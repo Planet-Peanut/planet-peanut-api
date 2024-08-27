@@ -20,8 +20,8 @@ export class UsersService {
 
   async updateUserItems(
     user: string,
-    items: Record<string, any>,
-    itemsWorn: Record<string, any>,
+    items: object,
+    itemsWorn: object,
   ): Promise<User> {
     return this.userModel
       .findOneAndUpdate({ name: user }, { items, itemsWorn })
