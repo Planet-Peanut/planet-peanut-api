@@ -1,4 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Item } from './item.schema';
+import { ItemsWorn } from './itemsWorn.schema';
 
 @Schema()
 export class User {
@@ -9,10 +11,10 @@ export class User {
   avatar: string;
 
   @Prop({ type: Object, default: {} })
-  items: Record<string, any>;
+  items: Item;
 
   @Prop({ type: Object, default: {} })
-  itemsWorn: Record<string, any>;
+  itemsWorn: ItemsWorn;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
