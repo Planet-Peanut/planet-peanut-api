@@ -31,9 +31,11 @@ export class CreateRunDto {
   @ApiProperty({
     description: 'The classname of the user',
     example: { grade: 9, letter: 'c', school: 'Albertslund Ungecenter' },
+    nullable: true, // Marked as nullable for Swagger documentation
   })
-  @IsObject()
-  classname: SchoolType;
+  @IsOptional() // Allows null or undefined values
+  @IsObject() // Validates that if present, it must be an object
+  classname: SchoolType | null;
 
   @ApiProperty({
     description: 'The id of the lesson',
@@ -53,12 +55,4 @@ export class CreateRunDto {
   @ApiProperty({ description: 'The subject of the user', example: ['Math'] })
   @IsArray()
   subject: string[];
-
-  @ApiProperty({
-    description: 'The creation date of the run',
-    example: new Date().toISOString(),
-  })
-  @IsDate()
-  @IsOptional() // Marked as optional since the default value will be handled by Mongoose
-  createdAt?: Date;
 }

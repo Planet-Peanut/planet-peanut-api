@@ -22,8 +22,8 @@ export class Run extends Document {
   @Prop({ required: true })
   reward: boolean;
 
-  @Prop({ required: true, type: Object })
-  classname: SchoolType;
+  @Prop({ required: false, type: Object }) // Allow null or undefined values
+  classname: SchoolType | null;
 
   @Prop({ required: true })
   lesson: string;
