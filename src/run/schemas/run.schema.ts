@@ -2,12 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { SchoolType } from 'src/class/schemas/class.schema';
 
-class ClassnameType {
-  grade: number;
-  letter: string;
-  school: string;
-}
-
 @Schema()
 export class Run extends Document {
   @Prop({ required: true })
