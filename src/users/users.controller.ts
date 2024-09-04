@@ -19,8 +19,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('new')
-  async create(@Body() createIUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createIUserDto);
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
   }
 
   @Delete('delete')
