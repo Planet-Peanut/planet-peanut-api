@@ -5,10 +5,15 @@ import {
   NotFoundException,
   Post,
   Put,
+  Get,
+  Param,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { FindUserNameDto } from './dto/find-user-name.dto';
 import { User } from './schemas/user.schema';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { ApiTags } from '@nestjs/swagger';
 import { DeleteUserDto } from './dto/delete-user.dto';
 import { UpdateUserItemsDto } from './dto/update-useri-tems.dto';
@@ -39,4 +44,14 @@ export class UsersController {
     const { user, items, itemsWorn } = updateUserItemsDto;
     return this.usersService.updateUserItems(user, items, itemsWorn);
   }
+
+  @Get('total-users')
+  async userCount(){
+    return this.usersService.userCount();
+  }
+
+  @Get('find-user-name')
+  async findUserName(@Query() findUserDto: FindUserNameDto) {
+    return this.usersService.checkUserName(findUserDto);
+}
 }
