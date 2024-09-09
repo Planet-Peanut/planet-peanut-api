@@ -32,6 +32,9 @@ export class Run extends Document {
 
   @Prop({ required: true })
   difficulty: string;
+
+  @Prop({ required: true, default: Date.now })
+  createdAt: Date;
 }
 
 export const RunSchema = SchemaFactory.createForClass(Run);
