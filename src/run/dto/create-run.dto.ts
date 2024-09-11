@@ -4,7 +4,7 @@ import { IsString, IsNumber } from 'class-validator';
 export class CreateRunDto {
   @ApiProperty({ description: 'The name of the user', example: 'Daniel' })
   @IsString()
-  user: string;
+  username: string;
 
   @ApiProperty({ description: 'The score of the user', example: 100 })
   @IsNumber()

@@ -18,6 +18,7 @@ import { SchoolModule } from './school/school.module';
     MongooseModule.forRootAsync({
       useFactory: async (configService: ConfigService) => {
         const isProduction = process.env.NODE_ENV === 'production';
+        console.log('Current NODE_ENV:', process.env.NODE_ENV);
         const uri = isProduction
           ? configService.get<string>('MONGO_DB_URI_PROD')
           : configService.get<string>('MONGO_DB_URI_DEV');

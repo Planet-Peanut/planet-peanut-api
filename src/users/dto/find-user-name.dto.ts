@@ -4,5 +4,5 @@ export class FindUserNameDto {
   @ApiProperty({ description: 'The name of the user', example: 'Daniel' })
   @IsNotEmpty()
   @IsString()
-  readonly name: string;
+  readonly username: string;
 }

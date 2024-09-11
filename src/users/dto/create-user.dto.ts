@@ -5,7 +5,7 @@ export class CreateUserDto {
   @ApiProperty({ description: 'The name of the user', example: 'Daniel' })
   @IsNotEmpty()
   @IsString()
-  readonly name: string;
+  readonly username: string;
 
   @ApiProperty({ description: 'The avatar of the user', example: 'Lion' })
   @IsNotEmpty()

@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 @Schema()
 export class Run extends Document {
   @Prop({ required: true })
-  user: string;
+  username: string;
 
   @Prop({ required: true })
   score: number;
@@ -32,6 +32,9 @@ export class Run extends Document {
 
   @Prop({ required: true })
   difficulty: string;
+
+  @Prop({ required: true, default: Date.now })
+  createdAt: Date;
 }
 
 export const RunSchema = SchemaFactory.createForClass(Run);

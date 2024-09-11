@@ -1,7 +1,8 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Get, Query } from '@nestjs/common';
 import { RunService } from './run.service';
 import { Run } from './schemas/run.schema';
 import { CreateRunDto } from './dto/create-run.dto';
+import { FindUserNameDto } from '../users/dto/find-user-name.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('run')
@@ -13,4 +14,8 @@ export class RunController {
   async uploadRun(@Body() createRunDto: CreateRunDto): Promise<Run> {
     return this.runService.createRun(createRunDto);
   }
+  @Get('user-runs')
+  async countRun(@Query() userDto: FindUserNameDto): Promise<number> {
+    return this.runService.getTotalRuns(userDto)
+}
 }

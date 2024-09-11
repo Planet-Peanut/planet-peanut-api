@@ -16,6 +16,9 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  //Log to check which ENV is loading and DB URI
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('MongoDB URI:', process.env.MONGO_DB_URI_PROD);
 
   app.useGlobalPipes(
     new ValidationPipe({
