@@ -16,9 +16,9 @@ export class RunService {
   // Getting total runds for a specific user from midnight to till now
 
   async getTotalRuns(userDto: FindUserNameDto): Promise<number> {
-    const { username } = userDto;
+    const { name } = userDto;
     const totalRun: number = await this.RunModel.countDocuments({
-      username: username,
+      username: name,
       createdAt: {
         $gte: new Date().setHours(0, 0, 0, 0),
         $lte: new Date(),
@@ -29,14 +29,14 @@ export class RunService {
 
   //Get Problem Solved of an user from midnight to till now
   async getProblemSolved(userDto: FindUserNameDto): Promise<number> {
-    const { username } = userDto;
+    const { name } = userDto;
     const startOfDay = new Date();
     startOfDay.setUTCHours(0, 0, 0, 0);
     const endOfDay = new Date();
     const problemSolved: Array<any> = await this.RunModel.aggregate([
       {
         $match: {
-          username: username,
+          username: name,
           createdAt: {
             $gte: startOfDay,
             $lte: endOfDay,
