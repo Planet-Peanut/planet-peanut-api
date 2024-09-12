@@ -17,13 +17,40 @@ export class RunService {
 
   async getTotalRuns(userDto: FindUserNameDto): Promise<number> {
     const { username } = userDto;
-    const totalRun = await this.RunModel.countDocuments({
+    const totalRun: number = await this.RunModel.countDocuments({
       username: username,
       createdAt: {
         $gte: new Date().setHours(0, 0, 0, 0),
         $lte: new Date(),
       },
-    });
+    })
     return 100 * totalRun;
   }
-}
+
+  //Get Problem Solved of an user from midnight to till now
+  async getProblemSolved(userDto: FindUserNameDto): Promise<number> {
+    const { username } = userDto;
+    const startOfDay = new Date();
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    const endOfDay = new Date();
+    const problemSolved: Array<any> = await this.RunModel.aggregate([
+      {
+        $match: {
+          username: username,
+          createdAt: {
+            $gte: startOfDay,
+            $lte: endOfDay,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          correctAnswers: { $sum: '$correctAnswers' },
+        },
+      },
+    ])
+    return problemSolved.length > 0 ? problemSolved[0].correctAnswers : 0;
+  }
+  }
+

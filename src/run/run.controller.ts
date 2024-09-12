@@ -18,4 +18,9 @@ export class RunController {
   async countRun(@Query() userDto: FindUserNameDto): Promise<number> {
     return this.runService.getTotalRuns(userDto)
 }
+
+  @Get('problem-solved/user')
+  async countProblemSolved(@Query() userDto: FindUserNameDto): Promise<number> {
+    return this.runService.getProblemSolved(userDto);
+}
 }

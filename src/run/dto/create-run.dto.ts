@@ -28,7 +28,7 @@ export class CreateRunDto {
 
   @ApiProperty({ description: 'The correct answer of the user', example: 10 })
   @IsNumber()
-  correctAnswer: number;
+  correctAnswers: number;
 
   @ApiProperty({ description: 'The wrong answer of the user', example: 5 })
   @IsNumber()
