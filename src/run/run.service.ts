@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Run } from './schemas/run.schema';
 import { Model } from 'mongoose';
@@ -51,6 +51,60 @@ export class RunService {
       },
     ])
     return problemSolved.length > 0 ? problemSolved[0].correctAnswers : 0;
+  }
+
+  async getTotalStreak(userDto: FindUserNameDto): Promise<object> {
+    const { name } = userDto;
+    const user = await this.RunModel.findOne({ username: name });
+    if (!user) throw new NotFoundException("user doesn't exsist");
+    const totalStreak = await this.RunModel.aggregate([
+      {
+        $match: {
+          username: name,
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              timezone: 'Europe/Copenhagen',
+              format: '%Y-%m-%d',
+              date: '$createdAt',
+            },
+          },
+        },
+      },
+      {
+        $sort: { _id: -1 },
+      },
+      {
+        $project:{
+          _id: 0,
+          date: '$_id',
+        },
+      }
+    ]);
+    const result = { completedToday: false, streak: 0 };
+    let dateValues = totalStreak.map((each) =>
+      new Date(each['date']).toDateString(),
+    );
+ 
+    if (dateValues.includes(new Date().toDateString())){
+      result.completedToday = true;
+      result.streak += 1;
+      dateValues = dateValues.slice(1);
+    }
+    const currentDate = new Date();
+   
+    for (const day of dateValues) {
+      currentDate.setDate(currentDate.getDate() - 1);
+      if (day === currentDate.toDateString()) result.streak++;
+      else{
+        break
+      }
+    }
+    console.log(result);
+    return result;
   }
   }
 

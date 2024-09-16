@@ -23,4 +23,12 @@ export class RunController {
   async countProblemSolved(@Query() userDto: FindUserNameDto): Promise<number> {
     return this.runService.getProblemSolved(userDto);
 }
+
+  //Get number of total streaks for a particular user
+
+  @Get('total-streak')
+  async countTotalStreak(@Query() userDto: FindUserNameDto): Promise<object> {
+    return this.runService.getTotalStreak(userDto);
+  }
+
 }

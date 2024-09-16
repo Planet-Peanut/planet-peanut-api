@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsObject } from 'class-validator';
 
 export class CreateRunDto {
   @ApiProperty({ description: 'The name of the user', example: 'Daniel' })
@@ -20,11 +20,12 @@ export class CreateRunDto {
 
   @ApiProperty({ description: 'The classname of the user', example: 'Math' })
   @IsString()
-  classname: string;
+  classname: Record<string, any>;
 
   @ApiProperty({ description: 'The lesson of the user', example: 'Addition' })
-  @IsString()
-  lesson: string;
+  @IsOptional() // If the field is not always required
+  @IsObject()
+  lesson: Record<string, any>;
 
   @ApiProperty({ description: 'The correct answer of the user', example: 10 })
   @IsNumber()
