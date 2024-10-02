@@ -16,13 +16,12 @@ export class RunController {
   }
   @Get('user-runs')
   async countRun(@Query() userDto: FindUserNameDto): Promise<number> {
-    return this.runService.getTotalRuns(userDto)
-}
-
+    return this.runService.getTotalRuns(userDto);
+  }
   @Get('problem-solved/user')
   async countProblemSolved(@Query() userDto: FindUserNameDto): Promise<number> {
     return this.runService.getProblemSolved(userDto);
-}
+  }
 
   //Get number of total streaks for a particular user
 
@@ -31,4 +30,8 @@ export class RunController {
     return this.runService.getTotalStreak(userDto);
   }
 
+  @Get('league-promotion')
+  async getLeaguePromotion(@Query() userDto: FindUserNameDto): Promise<object> {
+    return this.runService.getPromotion(userDto);
+  }
 }

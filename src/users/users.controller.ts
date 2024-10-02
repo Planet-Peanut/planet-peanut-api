@@ -45,12 +45,12 @@ export class UsersController {
   }
 
   @Get('total-users')
-  async userCount(){
+  async userCount() {
     return this.usersService.userCount();
   }
 
   @Get('find-user-name')
   async findUserName(@Query() findUserDto: FindUserNameDto) {
     return this.usersService.checkUserName(findUserDto);
-}
+  }
 }
