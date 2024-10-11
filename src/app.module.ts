@@ -8,6 +8,7 @@ import { RunModule } from './run/run.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { ClassModule } from './class/class.module';
 import { SchoolModule } from './school/school.module';
+import { ProgressModule } from './progress/progress.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { SchoolModule } from './school/school.module';
     TeacherModule,
     ClassModule,
     SchoolModule,
+    ProgressModule
   ],
   controllers: [AppController],
   providers: [AppService],
