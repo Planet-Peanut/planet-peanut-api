@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
   @Prop({ type: String, unique: true, default: '' })
   supabaseId: string;
@@ -34,6 +34,10 @@ export class User {
 
   @Prop({ required: true, default: Date.now })
   createdAt: Date;
+
+  
+  @Prop({ required: true, default: Date.now })
+  updateddAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

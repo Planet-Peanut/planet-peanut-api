@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsObject, IsString } from 'class-validator';
-import { SchoolType } from 'src/class/schemas/class.schema';
+import { SchoolDetail } from '../../school/dto/school-detail.dto';
 
 export class UserEnrollInClassDto {
   @ApiProperty({
@@ -15,12 +15,12 @@ export class UserEnrollInClassDto {
     example: { name: 'School', grade: 1, letter: 'A', country: 'Sweden' },
   })
   @IsObject()
-  school: SchoolType;
+  school: SchoolDetail;
 
   @ApiProperty({
     description: 'The previous school of the user',
     example: { name: 'School', grade: 1, letter: 'A', country: 'Sweden' },
   })
   @IsObject()
-  prevSchool: SchoolType;
+  prevSchool: SchoolDetail;
 }

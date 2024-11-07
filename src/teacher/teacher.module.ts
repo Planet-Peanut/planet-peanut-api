@@ -6,12 +6,14 @@ import { TeacherSchema } from './schemas/teacher.schema';
 import { ClassSchema } from 'src/class/schemas/class.schema';
 import { ClassService } from 'src/class/class.service';
 import { UserSchema } from 'src/users/schemas/user.schema';
+import { RunSchema } from 'src/run/schemas/run.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Teacher', schema: TeacherSchema }]),
     MongooseModule.forFeature([{ name: 'Class', schema: ClassSchema }]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: 'Run', schema: RunSchema }])
   ],
   providers: [TeacherService, ClassService],
   controllers: [TeacherController],

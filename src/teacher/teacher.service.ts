@@ -38,7 +38,7 @@ export class TeacherService {
   async teacherCreateClass(createClassDto: CreateClassDto): Promise<Teacher> {
     const { school, teacherID } = createClassDto;
 
-    const isObjectId = /^[0-9a-fA-F]{24}$/.test(teacherID);
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(teacherID.toString());
     if (!isObjectId) throw new BadRequestException('Invalid teacher ID');
 
     const teacher = await this.teacherModel.findById(teacherID);
@@ -47,8 +47,11 @@ export class TeacherService {
     }
 
     const createClass = await this.classService.createClass({
-      school: school,
+      school,
       teacherID: teacherID,
+      students: [],
+      createdAt: undefined,
+      updatedAt: undefined
     });
     teacher.classes.push(createClass['_id']);
 

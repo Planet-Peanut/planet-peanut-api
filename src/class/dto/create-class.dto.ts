@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsObject, IsString } from 'class-validator';
+import { Types } from 'mongoose';
+import { IsArray, IsDate, IsObject, IsString } from 'class-validator';
 import { SchoolType } from '../schemas/class.schema';
 
 export class CreateClassDto {
@@ -11,9 +12,31 @@ export class CreateClassDto {
   school: SchoolType;
 
   @ApiProperty({
-    description: 'The teacher ID of the class',
-    example: '1',
+    description: 'List of student IDs enrolled in the class',
+    example: ['studentId1', 'studentId2'],
   })
-  @IsString()
-  teacherID: string;
+  @IsArray()
+  @IsString({ each: true })
+  students: string[];
+
+
+  @ApiProperty({
+    description: 'The date and time when the class was created',
+    example: '2023-05-25T14:48:00.000Z',
+  })
+  @IsDate()
+  createdAt: Date;
+
+  @ApiProperty({
+    description: 'The date and time when the class was last updated',
+    example: '2023-05-25T14:48:00.000Z',
+  })
+  @IsDate()
+  updatedAt: Date;
+
+  @ApiProperty({
+    description: 'The teacher ID of the class',
+    example: '60d0fe4f5311236168a109ca',
+  })
+  teacherID: Types.ObjectId;
 }

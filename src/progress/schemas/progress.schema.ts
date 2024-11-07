@@ -5,7 +5,7 @@ import { Document } from 'mongoose';
 export class Progress extends Document {
   @Prop({ type: String, required: true })
   username: string;
-
+  
   @Prop({ type: String, trim: true, required: true })
   circleID: string;
 
