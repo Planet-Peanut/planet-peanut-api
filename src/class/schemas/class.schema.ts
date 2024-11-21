@@ -9,11 +9,10 @@ export type SchoolType = {
   letter: string;
   country?: string;
 };
-
 @Schema({ timestamps: true })
 export class Class extends Document {
   _id: Types.ObjectId;
-  
+
   @Prop({ type: Object, required: true })
   school: SchoolType;
 

@@ -122,7 +122,6 @@ export function mergeAndSortArrays(
   array1: Record<string, any>[],
   array2: Record<string, any>[],
 ): Record<string, any>[] {
-
   // Merge the two arrays
   const mergedArray = [...array1, ...array2];
   // Remove duplicates based on classname (school, grade, letter), keeping the entry with the highest score

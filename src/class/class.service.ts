@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Class } from './schemas/class.schema';
 import { Run } from '../run/schemas/run.schema';
@@ -7,7 +7,7 @@ import { CreateClassDto } from './dto/create-class.dto';
 import { User } from 'src/users/schemas/user.schema';
 import { UserEnrollInClassDto } from './dto/user-enroll-in-class.dto';
 import { RemoveStudentFromClassDto } from './dto/remove-student-from-class.dto';
-import { InfoSchoolDto  } from '../school/dto/create-info.dto';
+import { InfoSchoolDto } from '../school/dto/create-info.dto';
 import { getListofClasses, mergeAndSortArrays } from '.././utils/helpers';
 import { getCompetitionBoardQuery } from '.././utils/helpers';
 
@@ -27,20 +27,48 @@ export class ClassService {
   async userEnrollInClass(
     userEnrollInClassDto: UserEnrollInClassDto,
   ): Promise<Class> {
-    const { username, school } = userEnrollInClassDto;
-
-    const classExist = await this.classModel.findOne({ school });
-    if (!classExist) {
-      throw new NotFoundException('Class not found');
-    }
-
+    const { username, school, prevSchool } = userEnrollInClassDto;
     const student = await this.userModel.findOne({ name: username });
     if (!student) {
       throw new NotFoundException('Student not found');
     }
+    //check if class exsists or not
+    const classExist = await this.classModel.findOne({
+      name: school.school.name,
+      grade: school.school.grade,
+      letter: school.school.letter,
+    });
 
+    // if class doesn't exsist then create it
+    if (!classExist) {
+      const newClass = new this.classModel({
+        name: school.school.name,
+        grade: school.school.grade,
+        letter: school.school.letter,
+        students: [username],
+      });
+      await newClass.save();
+    }
+    // check if the student already exsists in the current class
+    if (classExist.students.includes(student['id'].toString()))
+      throw new BadRequestException('You are already enrolled for this class');
+
+    // if student is not already in the class then enroll
     classExist.students.push(student['_id'].toString());
+    // check if the student has a previous school or not
 
+    const prev = await this.classModel.findOne({
+      name: prevSchool.school.name,
+      grade: prevSchool.school.grade,
+      letter: prevSchool.school.letter,
+    });
+
+    //if prev exsists and includes that particular student then remove student from previous school
+    if (prev && prev.students.includes(student['_id'].toString())) {
+      prev.students = prev.students.filter(
+        (eachStudent) => eachStudent.toString() !== student.toString(),
+      );
+    }
     return classExist.save();
   }
 
@@ -75,7 +103,7 @@ export class ClassService {
     const schoolName = decodeURIComponent(InfoSchoolDto.name);
     if (!schoolName || schoolName == '') return;
 
-     //Dates:
+    //Dates:
     const startDate = {
       DK: new Date('2024-05-28T12:00:00'),
     };
@@ -83,7 +111,7 @@ export class ClassService {
       DK: new Date('2024-06-07T11:00:00'),
     };
 
-    //Get List of classes 
+    //Get List of classes
     const classes = await getListofClasses(this.classModel);
 
     interface CompetitionBoardQuery {
@@ -107,7 +135,7 @@ export class ClassService {
       query,
       this.runModel,
     );
-     //Merge
+    //Merge
     const mergedArray: Record<string, any>[] = mergeAndSortArrays(
       classes,
       board,
@@ -117,6 +145,6 @@ export class ClassService {
       board: mergedArray,
       startDate: startDate['DK'],
       endDate: endDate['DK'],
-    }
-}
+    };
+  }
 }

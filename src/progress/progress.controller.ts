@@ -4,6 +4,5 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('progress')
 @Controller('api/progress')
 export class ProgressController {
-  constructor(private readonly progressService: ProgressService) {}  
-  
+  constructor(private readonly progressService: ProgressService) {}
 }

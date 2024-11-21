@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsObject, IsString } from 'class-validator';
+import { IsObject, IsString, ValidateNested } from 'class-validator';
 import { SchoolDetail } from '../../school/dto/school-detail.dto';
+import { Type } from 'class-transformer';
 
 export class UserEnrollInClassDto {
   @ApiProperty({
@@ -15,6 +16,8 @@ export class UserEnrollInClassDto {
     example: { name: 'School', grade: 1, letter: 'A', country: 'Sweden' },
   })
   @IsObject()
+  @ValidateNested()
+  @Type(() => SchoolDetail)
   school: SchoolDetail;
 
   @ApiProperty({
@@ -22,5 +25,7 @@ export class UserEnrollInClassDto {
     example: { name: 'School', grade: 1, letter: 'A', country: 'Sweden' },
   })
   @IsObject()
+  @ValidateNested()
+  @Type(() => SchoolDetail)
   prevSchool: SchoolDetail;
 }

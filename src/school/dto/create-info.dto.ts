@@ -9,15 +9,12 @@ export class InfoSchoolDto {
   })
   @IsString()
   location: string;
-
   @ApiProperty({
     description: 'ID of the class in MongoDB',
     example: '670cf2d1516aed0224de3b34',
   })
-
   @IsMongoId()
   classID: string;
-
   @ApiProperty({
     description: 'Grade of that particular school',
     example: 8,
@@ -40,4 +37,3 @@ export class InfoSchoolDto {
   @IsString()
   name: string;
 }
-
