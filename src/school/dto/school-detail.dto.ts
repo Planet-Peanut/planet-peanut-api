@@ -1,12 +1,15 @@
-import { IsObject } from 'class-validator';
-export type SchoolType = {
-  name: string;
-  grade: number;
-  letter: string;
-  country: string;
-};
-
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 export class SchoolDetail {
-  @IsObject()
-  school: SchoolType;
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  grade: number;
+
+  @IsString()
+  letter: string;
+
+  @IsOptional()
+  @IsString()
+  country?: string;
 }

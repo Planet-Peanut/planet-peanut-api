@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Query,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ClassService } from './class.service';
 import { Class } from './schemas/class.schema';
 import { ApiTags } from '@nestjs/swagger';
@@ -13,8 +21,11 @@ export class ClassController {
 
   @Post('user-enroll-in-class')
   async userEnrollInClass(
-    @Body() userEnrollInClassDto: UserEnrollInClassDto,
+    @Body(new ValidationPipe()) userEnrollInClassDto: UserEnrollInClassDto,
   ): Promise<Class> {
+    console.log(userEnrollInClassDto.school);
+    console.log(userEnrollInClassDto.prevSchool);
+
     return this.classService.userEnrollInClass(userEnrollInClassDto);
   }
 

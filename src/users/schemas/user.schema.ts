@@ -35,7 +35,6 @@ export class User {
   @Prop({ required: true, default: Date.now })
   createdAt: Date;
 
-  
   @Prop({ required: true, default: Date.now })
   updateddAt: Date;
 }

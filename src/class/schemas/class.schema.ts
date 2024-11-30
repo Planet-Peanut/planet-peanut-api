@@ -13,8 +13,17 @@ export type SchoolType = {
 export class Class extends Document {
   _id: Types.ObjectId;
 
-  @Prop({ type: Object, required: true })
-  school: SchoolType;
+  @Prop({ required: true })
+  name: string;
+
+  @Prop({ required: true })
+  grade: number;
+
+  @Prop({ required: true })
+  letter: string;
+
+  @Prop()
+  country?: string;
 
   @Prop({ type: [String], default: [] })
   students: string[];
